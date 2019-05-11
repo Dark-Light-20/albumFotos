@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block maincontent%}
+<h1>Lista de Fotos</h1>
+   <br>
+   <ul>
+       {% for s in object_list %}
+           <li>
+               <a href="{% url 'photo-detail' s.id %}" >
+                   {{ s.title }}
+               </a>
+            </li>
+       {% endfor %}
+   </ul>
+{% endblock maincontent%}
