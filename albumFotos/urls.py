@@ -16,18 +16,32 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from fotos import views
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('album/', views.base, name='base'),
     path('admin/', admin.site.urls),
-    path('album/category/', views.CategoryListView.as_view(), name='category-list'),
-    path('album/category/<int:pk>/detail', views.CategoryDetailView.as_view(), name='category-detail'),
-    path('album/photo/', views.PhotoListView.as_view(), name='photo-list'),
-    path('album/photo/<int:pk>/detail', views.PhotoDetailView.as_view(), name='photo-detail'),
+    path('album/category/', login_required(views.CategoryListView.as_view()), name='category-list'),
+    path('album/category/<int:pk>/detail', login_required(views.CategoryDetailView.as_view()), name='category-detail'),
+    path('album/photo/', login_required(views.PhotoListView.as_view()), name='photo-list'),
+    path('album/photo/<int:pk>/detail', login_required(views.PhotoDetailView.as_view()), name='photo-detail'),
     #update
-    path('album/photo/<int:pk>/update/', views.PhotoUpdate.as_view(), name='photo-update'),
+    path('album/photo/<int:pk>/update/', login_required(views.PhotoUpdate.as_view()), name='photo-update'),
     #create
-    path('album/photo/create/', views.PhotoCreate.as_view(), name='photo-create'),
+    path('album/photo/create/', login_required(views.PhotoCreate.as_view()), name='photo-create'),
     #delete
-    path('album/photo/<int:pk>/delete/', views.PhotoDelete.as_view(), name='photo-delete'),
+    path('album/photo/<int:pk>/delete/', login_required(views.PhotoDelete.as_view()), name='photo-delete'),
+    #login
+    path('album/login', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
+    #logout
+    path('album/logout', auth_views.LogoutView.as_view(template_name='auth/logout.html'), name='logout'),
+    #profile
+    path('album/profile/<int:pk>', login_required(views.Profile.as_view(template_name='auth/profile.html')), name='profile'),
+    #pwdchange
+    path(
+        'album/change-password/',
+        login_required(auth_views.PasswordChangeView.as_view(template_name='auth/change-password.html')),
+        name='password-change'
+    ),
 ]

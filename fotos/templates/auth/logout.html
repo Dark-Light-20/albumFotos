@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block maincontent %}
+<h2>Has terminado tu sesión</h2>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        <a href="{% url 'login' %}">Iniciar Sesión de nuevo</a>
+    </small>
+</div>
+{% endblock %}

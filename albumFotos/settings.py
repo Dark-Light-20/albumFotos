@@ -129,3 +129,7 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates/'),
 )
+
+LOGIN_REDIRECT_URL = '/album'
+
+LOGIN_URL = 'login'

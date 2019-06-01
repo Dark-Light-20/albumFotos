@@ -3,6 +3,7 @@ from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from fotos.models import Category, Photo
+from django.contrib.auth.models import User
 
 # Create your views here.
 class CategoryListView(ListView):
@@ -28,6 +29,9 @@ class PhotoCreate(CreateView):
 class PhotoDelete(DeleteView):
     model = Photo
     success_url = reverse_lazy('photo-list')
+
+class Profile(DetailView):
+    model = User
 
 def base(request):
     return render(request, 'base.html')

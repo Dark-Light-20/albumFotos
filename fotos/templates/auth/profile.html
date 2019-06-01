@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block maincontent %}
+<title>Perfil</title>
+<img src="/static/user.png" style = "width:40px;height:40px">
+<h1>Bienvenido {{user}}</h1>
+<br>
+<div class="panel panel-default">
+  <div class="panel-heading">Datos de usuario</div>
+  <div class="panel-body">
+        <div class="well">Nombre: {{user.first_name}}</div>
+        <div class="well">Apellido: {{user.last_name}}</div>
+        <div class="well">E-mail: {{user.email}}</div>
+  </div>
+</div>
+{% endblock %}
